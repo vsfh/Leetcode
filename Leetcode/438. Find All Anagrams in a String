@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        vector<int> vs(256, 0), vp(256, 0), res;
+        if(s.size() < p.size()) return res;
+        for(int i = 0; i < p.size(); i++) {
+            vs[s[i]]++;
+            vp[p[i]]++;
+        }
+        if(vs == vp) res.push_back(0);
+        
+        for(int i = p.size(); i < s.size(); i++) {
+            vs[s[i]]++;
+            vs[s[i - p.size()]]--;
+            if(vs == vp) res.push_back(i - p.size() + 1);
+        }
+        return res;
+        
+    }
+};

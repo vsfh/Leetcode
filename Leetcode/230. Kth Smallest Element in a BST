@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        stack<TreeNode *> s;
+        while(root != NULL || !s.empty()) {
+            while(root != NULL) {
+                s.push(root);
+                root = root -> left;
+            }
+            root = s.top();
+            if(k == 1)
+                return root -> val;
+            else
+                k--;
+            s.pop();
+            root = root -> right;
+        } 
+    }
+};

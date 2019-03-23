@@ -1,0 +1,49 @@
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(!head) return nullptr;
+        while(head -> next) {
+            if(head -> next -> val == head -> val) {
+                while(head -> val == head -> next -> val) {
+                    head = head -> next;
+                    if(!head -> next) return nullptr;
+                }
+                head = head -> next;
+            }
+            else break;
+        }
+        if(!head -> next) return head;
+        ListNode* cou = head;
+        while(cou -> next -> next) {
+            if(cou -> next -> val == cou -> next -> next -> val) {
+                while(cou -> next -> next -> val == cou -> next -> val) {
+                    cou -> next = cou -> next -> next;
+                    if(!cou -> next -> next) break;
+                }
+                cou -> next = cou -> next -> next;
+                if(!cou -> next) break;
+            }
+            else cou = cou -> next;
+        }
+        return head;
+    }
+};
+
+//class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if (!head) return 0;
+        if (!head->next) return head;
+        
+        int val = head->val;
+        ListNode* p = head->next;
+        
+        if (p->val != val) {
+            head->next = deleteDuplicates(p);
+            return head;
+        } else {
+            while (p && p->val == val) p = p->next;
+            return deleteDuplicates(p);
+        }
+    }
+};

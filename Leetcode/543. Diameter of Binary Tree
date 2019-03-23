@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int diameterOfBinaryTree(TreeNode* root) {
+        if(!root) return 0;
+        int res = depth(root->right) + depth(root->left);
+        return max(res,max( diameterOfBinaryTree(root->right), diameterOfBinaryTree(root->left)));
+        
+    }
+    int depth(TreeNode* root) {
+        if(!root) return 0;
+        return max(depth(root->left),depth(root->right)) + 1;
+    }
+};
